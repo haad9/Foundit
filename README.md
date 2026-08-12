@@ -1,148 +1,112 @@
-# Foundit Merge
+# Foundit
 
-Foundit Merge is a functional multiplayer vibe-coding prototype.
+**Multiplayer safety for vibe coding.**
 
-Two teammates describe changes to the same checkout in normal language. Foundit creates two independent configurations, previews each one, explains their changes, detects incompatible intent, collects a human resolution, merges the result, runs four checks, and creates a deterministic rollback version.
+Foundit helps teammates combine AI-generated product changes without forcing them to understand Git or resolve conflicts line by line.
 
-## Run it
+Two teammates describe what they want in normal language. Foundit creates an independent version for each idea, explains the customer-facing changes, detects incompatible behavior, asks the team for one clear decision, and produces a checked, reversible result.
 
-Requirements: Node.js 20 or newer. There are no packages, accounts, API keys, or network services.
+![Foundit conflict review](conflict-screenshot.png)
 
-```powershell
-npm.cmd run dev
-```
+## The problem
 
-Open [http://127.0.0.1:4173](http://127.0.0.1:4173) in Chrome or Edge.
+AI coding tools make it easy for one person to build quickly, but collaboration is still designed around files, branches, and code diffs. Two individually valid AI requests can create an incompatible product even when they never edit the same line of code.
 
-If PowerShell blocks `npm`, run:
+Foundit treats **intent** as the unit of collaboration. It shows teams what each person is trying to change and where those intentions disagree.
 
-```powershell
-node server.js
-```
+## How it works
 
-## Try the product
+1. Two teammates describe their changes in normal language.
+2. Foundit creates a separate product version for each request.
+3. The team previews both versions and reviews what will change.
+4. Foundit detects direct and semantic conflicts between the requested behaviors.
+5. The team chooses a product outcome instead of resolving code manually.
+6. Foundit merges the approved behavior, runs safety checks, and creates a rollback version.
 
-### Guided demo
+## Demo scenario
 
-1. Click Maya and Theo to view their separate working versions.
-2. Click **Compare changes**.
-3. Choose how to resolve the shipping-flow overlap.
-4. Let Foundit run its checks.
-5. Open the merged checkout or roll it back.
+Maya asks for a one-page checkout with express payment. Theo simultaneously asks for discount codes and address verification.
 
-Keyboard shortcuts: `1` compare, `2` resolve or merge, `3` open the result, `E` edit ideas, and `R` reset.
+Both ideas work independently, but they disagree about the checkout flow: Maya removes additional steps while Theo introduces a separate verification step. Foundit identifies the conflict and recommends verifying the address inline, preserving the intent behind both requests.
 
-### Custom ideas
+The resulting checkout includes:
 
-Click **Try your ideas**. Enter two checkout requests or use one of the example pairs.
+- One-page checkout
+- Express payment
+- Discount codes
+- Inline address verification
+- A deterministic rollback point
 
-The current vertical slice understands:
+![Foundit merged result](merged-screenshot.png)
 
-- One-page or multi-step checkout
+## Functional MVP
+
+The current intent engine understands checkout requests involving:
+
+- One-page and multi-step layouts
 - Express payment
 - Discount, promotion, and coupon codes
-- Inline, separate, or removed address verification
-- Guest checkout versus required accounts
+- Inline, separate, and removed address verification
+- Guest checkout and required accounts
 - Order notes and delivery instructions
 - Gift messages
 
-Unsupported requests are marked clearly and do not silently invent a change.
+Unsupported requests are identified instead of silently producing invented behavior.
 
-Direct recording links:
+## Architecture
 
-- Prompt editor: [http://127.0.0.1:4173/?state=ideas](http://127.0.0.1:4173/?state=ideas)
-- Conflict: [http://127.0.0.1:4173/?state=conflict](http://127.0.0.1:4173/?state=conflict)
-- Completed merge: [http://127.0.0.1:4173/?state=merged](http://127.0.0.1:4173/?state=merged)
+Foundit is built as a focused vertical slice with three layers:
 
-## Test it
+### Intent engine
 
-Run everything:
+Converts supported natural-language requests into structured product behavior while preserving the teammate and prompt behind each change.
 
-```powershell
-npm.cmd test
-```
+### Conflict and merge engine
 
-Run individual layers:
+Compares both requested configurations, detects direct and semantic conflicts, offers possible resolutions, and generates a deterministic merged configuration.
 
-```powershell
-npm.cmd run test:engine
-npm.cmd run test:api
-npm.cmd run test:browser
-```
+### Interactive review interface
 
-The automated suite covers:
+Lets teams enter ideas, preview versions, review customer-facing changes, resolve conflicts, inspect the merged product, and roll back the result.
+
+## Built with
+
+- JavaScript
+- Node.js
+- HTML5
+- CSS3
+- REST APIs
+- Node Test Runner
+- Chrome DevTools Protocol
+
+The functional prototype does not require a database or a generative AI API at runtime.
+
+## Testing
+
+The project includes 14 automated tests covering:
 
 - Natural-language behavior extraction
 - Compatible and incompatible teammate requests
 - Recommended and explicit conflict resolutions
-- Result configuration and rollback version generation
-- HTTP health, analysis, merge, validation, and static-file security
-- A real headless-Chrome journey through custom ideas, preview, comparison, resolution, merge, and reset
+- Merged configuration and rollback generation
+- API health, analysis, merge, and validation behavior
+- Static-file security
+- A complete headless-browser journey from custom ideas through merge and reset
 
-The browser test finds a local Chrome or Edge installation. Set `CHROME_PATH` when the browser is installed elsewhere.
+Run the complete test suite with:
 
-### Manual acceptance check
+```bash
+npm test
+```
 
-Use **Guest vs account** in the prompt editor. Build the versions, compare them, choose Theo's account requirement, and merge. The final checkout must say **Account required before payment**.
+## Current scope
 
-Use **Compatible ideas** next. The comparison must report zero overlaps; after merging, both order notes and gift-message fields must appear.
+Foundit currently proves the collaboration workflow through a real structured checkout configuration. It does not yet inspect arbitrary repositories, write production source code, or push approved merges to GitHub.
 
-## Film the 75-second demo
+The next milestone is a repository adapter that connects prompt history and code changes to the same intent model, runs proposed versions in isolated environments, and opens a tested pull request after approval.
 
-Record the browser at 1440×900 or 1920×1080, 100% zoom. Hide bookmarks and notifications. Start the server before recording and keep the three direct links open as backup tabs.
+## Vision
 
-### Script
+Foundit aims to become the collaboration layer between people, coding agents, and production software.
 
-**0:00–0:08 — Problem**
-
-> Vibe coding made it possible for anyone to build software. But the moment a second person joins, collaboration falls back to Git and merge conflicts.
-
-**0:08–0:19 — Real input**
-
-Click **Try your ideas**. Pause on the two requests, then click **Build both versions**.
-
-> Maya wants a faster one-page checkout. Theo adds discounts and address verification. Foundit turns both requests into separate, safe versions.
-
-**0:19–0:30 — Preview**
-
-Click Maya and then Theo.
-
-> Each idea works by itself. But both change the checkout flow.
-
-**0:30–0:44 — Understand the conflict**
-
-Click **Compare changes**.
-
-> Instead of showing nontechnical teammates a wall of code, Foundit explains what changed and finds the one decision they actually need to make.
-
-**0:44–0:57 — Resolve and check**
-
-Keep **simple + verify inline**, then click the green button. Leave two seconds of silence for the checks.
-
-> The team keeps the simple flow while verification happens inline. Foundit merges the behavior, checks compatibility, and creates a rollback point.
-
-**0:57–1:09 — Result**
-
-Click **Open merged app**.
-
-> Both ideas are now working together: one page, express pay, discounts, and safe address verification.
-
-**1:09–1:15 — Close**
-
-> Foundit is GitHub for people who do not code. Vibe coding made software creation accessible. We make it multiplayer.
-
-End immediately after the final sentence.
-
-### Recording advice
-
-- Record the screen silently first and add narration afterward.
-- Move the mouse slowly and leave half a second around each click.
-- Do not type during the main take; use the prefilled ideas.
-- Capture a complete take, a conflict-to-merge take, and a merged-result take.
-- If a take fails, switch to the direct URL for the next scene.
-
-## Honest MVP boundary
-
-This is a complete, testable vertical slice for checkout behavior—not an arbitrary repository merger. The merge engine changes a real structured checkout configuration and the UI renders that result. It does not yet inspect GitHub repositories, write source code, run a production app's test suite, or push commits.
-
-The next technical milestone is a GitHub adapter that converts prompt history and code diffs into this same plain-English change model, then executes approved merges inside isolated worktrees.
+**Two teammates. Two AI workflows. One working app.**

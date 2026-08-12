@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f2efe6" />
+    <title>Foundit Merge — Multiplayer vibe coding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Foundit home">
+        <span class="brand-mark"><i></i><i></i></span>
+        <span>foundit</span>
+      </a>
+      <div class="project-title">
+        <span class="muted">Projects</span><span>/</span><strong>poppy checkout</strong>
+      </div>
+      <div class="header-actions">
+        <div class="avatars" aria-label="Collaborators online">
+          <span class="avatar ava-maya">M</span>
+          <span class="avatar ava-theo">T</span>
+          <span class="avatar ava-ai">✦</span>
+        </div>
+        <button class="btn ghost" id="editIdeasBtn">Try your ideas <span>✦</span></button>
+        <button class="btn ghost" id="resetBtn">Reset demo</button>
+        <button class="btn dark" id="shareBtn">Share <span>↗</span></button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="hero-row">
+        <div>
+          <div class="eyebrow"><span class="live-dot"></span> Merge room · 3 online</div>
+          <h1>Two ideas.<br /><em>One working app.</em></h1>
+        </div>
+        <div class="hero-copy">
+          <p>Foundit turns parallel AI changes into one safe update—without making your team learn Git.</p>
+          <div class="progress-wrap">
+            <span id="stageLabel">01 · Parallel changes</span>
+            <div class="progress-track"><i id="progressBar"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stage" id="stage">
+        <div class="stage-toolbar">
+          <div class="stage-status"><span class="pulse"></span><span id="statusText">Two teammates are building in parallel</span></div>
+          <div class="view-toggle">
+            <button class="active" data-view="preview">Preview</button>
+            <button data-view="changes">Changes <span class="count">4</span></button>
+          </div>
+          <div class="device-toggle" aria-label="Preview device">
+            <button data-device="mobile">▯</button>
+            <button class="active" data-device="desktop">▭</button>
+          </div>
+        </div>
+
+        <div class="stage-grid">
+          <aside class="branches-panel">
+            <div class="panel-heading">
+              <span>Live branches</span>
+              <button id="editIdeasSmall" aria-label="Edit teammate ideas">Edit ✎</button>
+            </div>
+
+            <article class="branch-card maya selected" data-branch="maya">
+              <div class="branch-top">
+                <span class="avatar ava-maya">M</span>
+                <div><strong>Maya's idea</strong><small>Just now</small></div>
+                <span class="working"><i></i> Ready</span>
+              </div>
+              <p class="branch-prompt">“Make checkout feel instant. Put everything on one clean page and add express pay.”</p>
+              <div class="chips" id="mayaChips"><span>1-page checkout</span><span>Express pay</span></div>
+              <button class="preview-link">View this version <span>↗</span></button>
+            </article>
+
+            <article class="branch-card theo" data-branch="theo">
+              <div class="branch-top">
+                <span class="avatar ava-theo">T</span>
+                <div><strong>Theo's idea</strong><small>Just now</small></div>
+                <span class="working"><i></i> Ready</span>
+              </div>
+              <p class="branch-prompt">“Add discount codes and verify the address before payment.”</p>
+              <div class="chips" id="theoChips"><span>Discounts</span><span>Address check</span></div>
+              <button class="preview-link">View this version <span>↗</span></button>
+            </article>
+
+            <div class="ai-note">
+              <span class="spark">✦</span>
+              <div><strong>Foundit understands the intent</strong><p>It tracks the prompt behind every change—not only the code.</p></div>
+            </div>
+          </aside>
+
+          <section class="preview-panel" id="previewPanel">
+            <div class="browser-frame" id="browserFrame">
+              <div class="browser-top">
+                <div class="traffic"><i></i><i></i><i></i></div>
+                <div class="address"><span>⌁</span> poppy.shop/checkout</div>
+                <span class="secure">Secure</span>
+              </div>
+
+              <div class="shop-page" id="shopPage">
+                <nav class="shop-nav">
+                  <a class="poppy-logo">poppy<span>●</span></a>
+                  <div><a>Shop</a><a>About</a><a>Journal</a></div>
+                  <div><a>Search</a><a>Bag (2)</a></div>
+                </nav>
+                <div class="checkout">
+                  <section class="checkout-form">
+                    <span class="mini-label" id="layoutBadge">Checkout · One page</span>
+                    <h2 id="checkoutTitle">Everything you need,<br />all in one place.</h2>
+                    <div class="express-row" id="expressRow">
+                      <button class="express apple">● Pay</button>
+                      <button class="express coral">poppy pay</button>
+                    </div>
+                    <div class="or"><span></span>or continue below<span></span></div>
+                    <div class="field-grid">
+                      <label class="wide">Email address<input value="maya@foundit.team" readonly /></label>
+                      <label>First name<input value="Maya" readonly /></label>
+                      <label>Last name<input value="Chen" readonly /></label>
+                      <label class="wide address-field">Shipping address<input value="42 Berry Street" readonly /><i id="verifiedBadge">✓ Verified</i></label>
+                      <label>City<input value="Brooklyn" readonly /></label>
+                      <label>ZIP code<input value="11249" readonly /></label>
+                    </div>
+                    <label class="checkbox" id="accessLabel"><input type="checkbox" checked /> Save my details for next time</label>
+                    <div class="extras-panel" id="extrasPanel">
+                      <label id="orderNotesField">Order notes<input value="Leave beside the front door" readonly /></label>
+                      <label id="giftMessageField">Gift message<input value="A little something for you" readonly /></label>
+                    </div>
+                  </section>
+                  <aside class="order-card">
+                    <div class="order-item"><div class="product-img flower-one">✿</div><div><strong>Cloud vase</strong><small>Oat · One size</small></div><b>$58</b></div>
+                    <div class="order-item"><div class="product-img flower-two">✦</div><div><strong>Sunday stems</strong><small>Seasonal bundle</small></div><b>$32</b></div>
+                    <div class="discount" id="discountBox"><input placeholder="Discount code" /><button>Apply</button></div>
+                    <div class="totals"><p><span>Subtotal</span><b>$90</b></p><p><span>Shipping</span><b>Free</b></p><p class="total"><span>Total</span><b>$90 USD</b></p></div>
+                    <button class="pay-button">Pay now <span>→</span></button>
+                    <small class="safe-copy">Secure checkout · Easy returns</small>
+                  </aside>
+                </div>
+              </div>
+
+              <div class="change-view" id="changeView">
+                <div class="change-head">
+                  <div><small>Merge review</small><span>What will change</span></div>
+                  <p>Review the product behavior before it goes live.</p>
+                </div>
+                <div class="change-list" id="changeList">
+                  <article class="change-item keep"><span class="change-index">01</span><div class="change-owner"><i class="owner-swatch maya"></i><small>Maya</small></div><div class="change-copy"><strong>Combined checkout into one page</strong><p>Contact, shipping, and payment now appear together.</p></div><span class="change-action">Included</span></article>
+                  <article class="change-item keep"><span class="change-index">02</span><div class="change-owner"><i class="owner-swatch theo"></i><small>Theo</small></div><div class="change-copy"><strong>Added discount code field</strong><p>Customers can apply a promotion before paying.</p></div><span class="change-action">Included</span></article>
+                  <article class="change-item conflict"><span class="change-index">03</span><div class="change-owner"><i class="owner-swatch team"></i><small>Team decision</small></div><div class="change-copy"><strong>Shipping address flow</strong><p>Maya removed the extra step. Theo needs address verification.</p></div><span class="change-action">Needs decision</span></article>
+                  <article class="change-item keep"><span class="change-index">04</span><div class="change-owner"><i class="owner-swatch maya"></i><small>Maya</small></div><div class="change-copy"><strong>Added express payment</strong><p>Apple Pay and Poppy Pay appear above the form.</p></div><span class="change-action">Included</span></article>
+                </div>
+              </div>
+            </div>
+
+            <div class="cursor cursor-maya"><span>Maya</span></div>
+            <div class="cursor cursor-theo"><span>Theo</span></div>
+          </section>
+
+          <aside class="inspector-panel">
+            <div class="inspector-empty" id="inspectorInitial">
+              <span class="merge-symbol"><i></i><i></i><b>✦</b></span>
+              <h3>Ready to combine</h3>
+              <p id="readyCopy">Foundit found four changes across two versions.</p>
+              <button class="btn primary wide" id="compareBtn">Compare changes <span>→</span></button>
+              <small>Nothing changes until your team approves it.</small>
+            </div>
+
+            <div class="conflict-card hidden" id="conflictCard">
+              <div class="conflict-title"><span>!</span><div><small id="conflictCount">1 overlap found</small><strong id="conflictHeading">Both ideas changed checkout</strong></div></div>
+              <p id="conflictExplanation">The changes are compatible, but one detail needs a decision.</p>
+              <div class="decision-box">
+                <small id="conflictArea">Shipping address</small>
+                <strong>How should this work?</strong>
+                <div id="decisionOptions">
+                  <label><input type="radio" name="choice" value="maya" /> Keep Maya's simpler flow</label>
+                  <label class="recommended"><input type="radio" name="choice" value="combined" checked /> Keep it simple + verify inline <em>Best of both</em></label>
+                  <label><input type="radio" name="choice" value="theo" /> Use Theo's extra step</label>
+                </div>
+              </div>
+              <button class="btn primary wide" id="resolveBtn">Use the best of both <span>✦</span></button>
+            </div>
+
+            <div class="merge-card hidden" id="mergeCard">
+              <div class="merge-animation"><i></i><i></i><span>✦</span></div>
+              <h3 id="mergeTitle">Combining both ideas…</h3>
+              <p id="mergeCopy">Foundit is merging the intent, updating the code, and checking the result.</p>
+              <ul class="checks" id="mergeChecks">
+                <li id="checkOne"><span></span>Preserving requested features</li>
+                <li id="checkTwo"><span></span>Checking checkout compatibility</li>
+                <li id="checkThree"><span></span>Creating rollback point</li>
+              </ul>
+            </div>
+
+            <div class="success-card hidden" id="successCard">
+              <span class="success-mark">✓</span>
+              <small>Merge complete</small>
+              <h3>Both ideas are live.</h3>
+              <p id="successCopy">One-page checkout, express pay, discounts, and inline address verification—all working together.</p>
+              <div class="result-stats"><div><strong>2</strong><span>ideas merged</span></div><div><strong id="passedCount">4</strong><span>checks passed</span></div></div>
+              <button class="btn primary wide" id="openBtn">Open merged app <span>↗</span></button>
+              <button class="rollback" id="rollbackBtn">↶ Roll back this merge</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <footer class="demo-footer">
+        <div><span>Built for teams who speak in ideas, not branches.</span></div>
+        <div><span class="key">1</span> Compare <span class="key">2</span> Resolve <span class="key">3</span> Merge <span class="key">R</span> Reset</div>
+      </footer>
+    </main>
+
+    <div class="toast" id="toast"><span>✓</span><div><strong>Safe rollback created</strong><small>You can return to either original version.</small></div></div>
+
+    <div class="modal-backdrop hidden" id="ideasModal" role="dialog" aria-modal="true" aria-labelledby="ideasTitle">
+      <form class="ideas-modal" id="ideasForm">
+        <div class="modal-top">
+          <div><span class="eyebrow">Live prompt lab</span><h2 id="ideasTitle">What should each teammate change?</h2></div>
+          <button type="button" class="modal-close" id="closeIdeasBtn" aria-label="Close">×</button>
+        </div>
+        <p class="modal-intro">Use normal words. Foundit will create two safe versions, explain the changes, and catch incompatible ideas.</p>
+        <div class="idea-inputs">
+          <label class="idea-input maya-input">
+            <span><i class="avatar ava-maya">M</i><strong>Maya's idea</strong><small id="mayaCount">0 / 500</small></span>
+            <textarea id="mayaPrompt" maxlength="500">Make checkout feel instant. Put everything on one clean page and add express pay.</textarea>
+          </label>
+          <label class="idea-input theo-input">
+            <span><i class="avatar ava-theo">T</i><strong>Theo's idea</strong><small id="theoCount">0 / 500</small></span>
+            <textarea id="theoPrompt" maxlength="500">Add discount codes and verify the address before payment.</textarea>
+          </label>
+        </div>
+        <div class="prompt-examples">
+          <span>Try an example:</span>
+          <button type="button" data-example="launch">Launch conflict</button>
+          <button type="button" data-example="access">Guest vs account</button>
+          <button type="button" data-example="compatible">Compatible ideas</button>
+        </div>
+        <div class="form-error hidden" id="ideasError"></div>
+        <div class="modal-actions">
+          <span><b>Supported:</b> layout, express pay, discounts, address checks, guest access, order notes, gift messages</span>
+          <button type="submit" class="btn primary" id="analyzeBtn">Build both versions <span>→</span></button>
+        </div>
+      </form>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

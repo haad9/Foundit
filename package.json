@@ -1,0 +1,14 @@
+{
+  "name": "foundit-merge-demo",
+  "version": "2.0.0",
+  "description": "A testable multiplayer vibe-coding merge prototype",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "test": "node --test",
+    "test:engine": "node --test tests/merge-engine.test.js",
+    "test:api": "node --test tests/server.test.js",
+    "test:browser": "node --test tests/browser.test.js"
+  }
+}
